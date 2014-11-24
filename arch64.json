@@ -1,0 +1,34 @@
+{
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "guest_os_type": "ArchLinux_64",
+      "guest_additions_mode": "disable",
+      "iso_url": "http://www.mirrorservice.org/sites/ftp.archlinux.org/iso/2014.11.01/archlinux-2014.11.01-dual.iso",
+      "iso_checksum": "a140bb9d182d2c5260132fe4ab68a5d438b16671",
+      "iso_checksum_type": "sha1",
+      "ssh_username": "root",
+      "ssh_password": "hunter2",
+      "shutdown_command": "echo 'packer' | sudo -S shutdown -P now",
+      "boot_wait": "10s",
+      "boot_command": [
+        "<enter><wait10><wait10>",
+        "echo root:hunter2 | chpasswd<enter>",
+        "systemctl start sshd<enter>"
+      ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "script": "install.sh"
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "output": "arch64.box",
+      "compression_level": 9
+    }
+  ]
+}
