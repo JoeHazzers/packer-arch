@@ -8,20 +8,26 @@
       "iso_checksum": "a140bb9d182d2c5260132fe4ab68a5d438b16671",
       "iso_checksum_type": "sha1",
       "ssh_username": "root",
-      "ssh_password": "hunter2",
+      "ssh_password": "vagrant",
       "shutdown_command": "echo 'packer' | sudo -S shutdown -P now",
+      "http_directory": "scripts",
       "boot_wait": "10s",
       "boot_command": [
         "<enter><wait10><wait10>",
-        "echo root:hunter2 | chpasswd<enter>",
-        "systemctl start sshd<enter>"
+        "curl -O http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter><wait5>",
+        "bash ./install.sh<enter>"
       ]
     }
   ],
   "provisioners": [
     {
       "type": "shell",
-      "script": "install.sh"
+      "script": "scripts/virtualbox.sh",
+      "only": ["virtualbox-iso"]
+    },
+    {
+      "type": "shell",
+      "script": "scripts/vagrant.sh"
     }
   ],
   "post-processors": [
