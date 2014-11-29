@@ -6,6 +6,7 @@ export DISK_BIOS="1"
 export DISK_ROOT="2"
 export DISK_MOUNT="/mnt"
 export DISK_MOUNT_OPTIONS="-o noatime,autodefrag,compress=lzo,space_cache"
+export DISK_FILESYSTEM="btrfs"
 
 export HOSTNAME="arch"
 export ROOT_PASSWORD="vagrant"
@@ -149,7 +150,7 @@ disk_partitions() {
 
 disk_filesystems() {
   print "creating btrfs filesystem for root partition ${DISK_DEVICE}${DISK_ROOT}"
-  mkfs.btrfs "${DISK_DEVICE}${DISK_ROOT}"
+  mkfs."${DISK_FILESYSTEM}" "${DISK_DEVICE}${DISK_ROOT}"
 }
 
 disk_mount() {
