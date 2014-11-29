@@ -4,8 +4,8 @@ set -e
 
 KEY_URL="https://raw.github.com/mitchellh/vagrant/master/keys/vagrant.pub"
 
-# user accound
-useradd vagrant
+# user account
+useradd -m vagrant
 echo 'vagrant:vagrant' | chpasswd
 
 # sudo
