@@ -7,8 +7,8 @@ export DISK_DEVICE="/dev/sda"
 export DISK_BIOS="1"
 export DISK_ROOT="2"
 export DISK_MOUNT="/mnt"
-export DISK_MOUNT_OPTIONS="-o noatime,autodefrag,compress=lzo,space_cache"
-export DISK_FILESYSTEM="btrfs"
+export DISK_MOUNT_OPTIONS="-o noatime"
+export DISK_FILESYSTEM="ext4"
 
 export HOSTNAME="arch"
 export ROOT_PASSWORD="vagrant"
@@ -16,7 +16,7 @@ export TIMEZONE="Europe/London"
 export LOCALE="en_GB.UTF-8"
 export LANG="en_GB.UTF-8"
 export KEYMAP="uk"
-export PACKAGES="btrfs-progs sudo"
+export PACKAGES="sudo"
 
 
 # helper functions
