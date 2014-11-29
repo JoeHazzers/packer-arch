@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+export MIRRORLIST="https://www.archlinux.org/mirrorlist/?country=all&protocol=http&ip_version=4&use_mirror_status=on"
+
 export DISK_DEVICE="/dev/sda"
 export DISK_BIOS="1"
 export DISK_ROOT="2"
@@ -36,6 +38,7 @@ install() {
 
 install_config() {
   config_keys
+  config_mirror
 }
 
 install_disk() {
@@ -129,6 +132,15 @@ chroot_ssh() {
 config_keys() {
   print "setting console keymap to '${KEYMAP}'"
   loadkeys "${KEYMAP}"
+}
+
+config_mirror() {
+  print "choosing the quickest mirrors"
+  curl -o /tmp/mirrorlist "${MIRRORLIST}"
+  sed -i 's/#S/S/g' /tmp/mirrorlist
+  mv /tmp/mirrorlist /etc/pacman.d/mirrorlist
+  pacman -Sy --noconfirm --needed reflector
+  reflector --verbose -l 200 -p http --sort rate --save /etc/pacman.d/mirrorlist
 }
 
 #
