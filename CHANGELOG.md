@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.3.0
+
+- Updated to 2014.12.01 ISO
+
 ## v0.2.2
 
 - Added a changelog to the project
