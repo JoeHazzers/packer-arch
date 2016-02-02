@@ -15,5 +15,5 @@ chmod 0400 /etc/sudoers.d/vagrant
 # insecure vagrant ssh key
 mkdir -pm 700 ~vagrant/.ssh
 curl -Lo ~vagrant/.ssh/authorized_keys "${KEY_URL}"
-chmod 0500 ~vagrant/.ssh/authorized_keys
-chown -R vagrant ~vagrant/.ssh
+chmod 0600 ~vagrant/.ssh/authorized_keys
+chown -R vagrant:vagrant ~vagrant/.ssh
