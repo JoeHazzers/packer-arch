@@ -1,14 +1,19 @@
 {
+  "variables": {
+    "arch_date": "2016.02.01",
+    "arch_sha1": "37427c722ffc57c15fb984287c34d5d48cc84247"
+  },
   "builders": [
     {
       "type": "virtualbox-iso",
       "guest_os_type": "ArchLinux_64",
       "guest_additions_mode": "disable",
-      "iso_url": "http://www.mirrorservice.org/sites/ftp.archlinux.org/iso/2014.12.01/archlinux-2014.12.01-dual.iso",
-      "iso_checksum": "86085153f97f0097fd0a02496e67cf85138c1ba5",
+      "iso_url": "http://www.mirrorservice.org/sites/ftp.archlinux.org/iso/{{ user `arch_date` }}/archlinux-{{ user `arch_date` }}-dual.iso",
+      "iso_checksum": "{{ user `arch_sha1` }}",
       "iso_checksum_type": "sha1",
       "ssh_username": "root",
       "ssh_password": "vagrant",
+      "ssh_timeout": "30m",
       "shutdown_command": "echo 'packer' | sudo -S shutdown -P now",
       "http_directory": "scripts",
       "boot_wait": "10s",
@@ -35,6 +40,16 @@
       "type": "vagrant",
       "output": "arch64.box",
       "compression_level": 9
+    },
+    {
+      "type": "atlas",
+      "token": "{{ user `atlas_token` }}",
+      "artifact": "sigwinch/arch64",
+      "artifact_type": "vagrant.box",
+      "metadata": {
+        "created_at": "{{ timestamp }}",
+        "provider": "virtualbox"
+      }
     }
   ]
 }
