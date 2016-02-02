@@ -319,6 +319,7 @@ dhcp_enable() {
 ssh_install() {
   print "installing ssh"
   pacman -Sy --noconfirm openssh
+  sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 }
 
 ssh_enable() {
