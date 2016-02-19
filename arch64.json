@@ -15,6 +15,7 @@
       "ssh_password": "vagrant",
       "ssh_timeout": "30m",
       "shutdown_command": "echo 'packer' | sudo -S shutdown -P now",
+      "disk_size": 8000,
       "http_directory": "scripts",
       "boot_wait": "10s",
       "boot_command": [

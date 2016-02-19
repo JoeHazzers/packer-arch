@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.4.0
+
+- Reduced disk size to 8GB
+
 ## v0.3.0
 
 - Updated to 2014.12.01 ISO
